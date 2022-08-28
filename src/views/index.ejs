@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">News</a>
+        <a href="#contact">Contact</a>
+        <a href="#about">About</a>
+    </div>
+    <div class="w3-container">
+        <h2>List users table</h2>
+
+        <table class="w3-table-all w3-hoverable">
+            <thead>
+                <tr class="w3-light-grey">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(var i=0; i < dataUsers.length; i++) { %>
+                    <tr>
+                        <td>
+                            <%= dataUsers[i].firstName %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].lastName %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].email %>
+                        </td>
+                        <td>
+                            <%= dataUsers[i].address %>
+                        </td>
+                        <td>
+                            <button class="w3-button w3-border w3-medium w3-hover-light-green w3-border-light-green ">
+                                <a href="/user/detail/<%= dataUsers[i].id%>">Detail</a>
+                            </button>
+                            <button class="w3-button w3-border w3-medium  w3-hover-aqua w3-border-aqua">Edit</button>
+                            <button class="w3-button w3-border w3-medium w3-hover-red w3-border-red">Delete</button>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
