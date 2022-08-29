@@ -24,3 +24,22 @@
     background-color: #04aa6d;
     color: white;
 }
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    margin: 12px 0;
+}
+
+.form-group label {
+    display: block;
+    min-width: 100px;
+}
+
+.form-group input {
+    padding: 4px 12px;
+}

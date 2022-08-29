@@ -1,14 +1,11 @@
-const connection = require('../config/connectDb')
+const pool = require('../config/connectDb')
 
 class homeController {
-    getHomePage(req, res, next) {
-        connection.promise().query("SELECT * FROM `users`")
-            .then(
-                ([rows, fields]) => rows)
-            .then(data => res.render('index', {
-                dataUsers: data
-            }))
-            .catch(err => res.send(err))
+    async getHomePage(req, res, next) {
+        const [rows, fields] = await pool.execute('SELECT * FROM users')
+        return res.render('index', {
+            dataUsers: rows
+        })
     }
 }
 

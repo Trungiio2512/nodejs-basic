@@ -1,12 +1,9 @@
-const express = require('express')
-let router = express.Router();
-
-const homeController = require('../controller/homeController')
-
+const routerHome = require('./home')
+const routerUser = require('./routerUser')
 function routes(app) {
-    router.get('/', homeController.getHomePage)
 
-    return app.use('/', router)
+    app.use('/user', routerUser)
+    app.use('/', routerHome)
 }
 
 module.exports = routes;
