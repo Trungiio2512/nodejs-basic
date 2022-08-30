@@ -1,5 +1,6 @@
 const express = require('express')
 const path = require('path')
+var methodOverride = require('method-override')
 //----------------------------------------------------------------
 const app = express()
 const routes = require('./routes')
@@ -7,6 +8,8 @@ const configViewEngine = require('./config/viewEngine')
 
 require('dotenv').config()
 const port = process.env.PORT || 3000;
+
+app.use(methodOverride('_method'))
 
 app.use(
     express.urlencoded({

@@ -2,16 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="/css/app.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link rel="stylesheet" href="/css/app.css" />
     <title>Document</title>
 </head>
 
 <body>
-
     <div class="w3-container">
         <%- include('partials/header.ejs') %>
             <h2>List users table</h2>
@@ -43,47 +42,79 @@
                             </td>
                             <td>
                                 <button
-                                    class="w3-button w3-border w3-medium w3-hover-light-green w3-border-light-green ">
+                                    class="w3-button w3-border w3-medium w3-hover-light-green w3-border-light-green">
                                     <a href="/user/detail/<%= dataUsers[i].id%>">Detail</a>
                                 </button>
-                                <button
-                                    class="w3-button w3-border w3-medium  w3-hover-aqua w3-border-aqua">Edit</button>
-                                <button class="w3-button w3-border w3-medium w3-hover-red w3-border-red">Delete</button>
+                                <button data-id='<%= dataUsers[i].id%>'
+                                    class="btn-edit w3-button w3-border w3-medium w3-hover-aqua w3-border-aqua"
+                                    data-id=''>
+                                    Edit
+                                </button>
+                                <button data-id='<%= dataUsers[i].id%>'
+                                    class="btn-delete w3-button w3-border w3-medium w3-hover-red w3-border-red">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                         <% } %>
                 </tbody>
             </table>
     </div>
-
+    <form id='form-action-change-method' action="" method="POST"></form>
+    <!-- form create -->
     <div class="form-create-user">
-        <h1 style="text-align:center ;">create new user</h1>
+        <h1 style="text-align: center">create new user</h1>
         <div class="container">
-            <form class='form-container' action="/user/create-user" method="POST">
+            <form class="form-container" action="/user/create-user" method="POST">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" id="firstName" name="firstName" placeholder="Your first name..">
+                    <input type="text" id="firstName" name="firstName" placeholder="Your first name.." />
                 </div>
 
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" id="lastName" name="lastName" placeholder="Your last name..">
-
+                    <input type="text" id="lastName" name="lastName" placeholder="Your last name.." />
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Your email..">
+                    <input type="email" id="email" name="email" placeholder="Your email.." />
                 </div>
 
                 <div class="form-group">
                     <label for="address">address</label>
-                    <input type="text" id="address" name="address" placeholder="Your address..">
-
+                    <input type="text" id="address" name="address" placeholder="Your address.." />
                 </div>
-                <input type="submit" value="Submit">
+                <input type="submit" value="Submit" />
             </form>
         </div>
     </div>
 </body>
+<script>
+    const $ = document.querySelector.bind(document)
+    const $$ = document.querySelectorAll.bind(document)
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const formActionChangMethod = $('#form-action-change-method')
+        const btnDeletes = $$('.btn-delete')
+        const btnEdits = $$('.btn-edit')
+
+        Array.from(btnDeletes).forEach((btnDelete) => {
+            const idUser = btnDelete.dataset.id
+            btnDelete.onclick = () => {
+                formActionChangMethod.action = '/user/delete-user/' + idUser + '?_method=DELETE'
+                formActionChangMethod.submit()
+            }
+        }
+        )
+        Array.from(btnEdits).forEach((btnEdit) => {
+            const idUser = btnEdit.dataset.id
+            btnEdit.onclick = () => {
+                formActionChangMethod.action = '/user/edit-user/' + idUser + '?_method=GET'
+                formActionChangMethod.submit()
+            }
+        }
+        )
+    })
+</script>
 
 </html>
