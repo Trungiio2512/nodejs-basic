@@ -1,17 +1,15 @@
-const pool = require('../config/connectDb')
 const multer = require('multer');
-
 const upload = multer().single('profile_pic');
 
-class homeController {
-    async getHomePage(req, res, next) {
-        const [rows, fields] = await pool.execute('SELECT * FROM users')
-        return res.render('index', {
-            dataUsers: rows
-        })
+class uploadController {
+
+    //[GET]: /upload
+    async show(req, res, next) {
+        res.render('uploadFile.ejs')
     }
 
-    async handleUploadFile(req, res, next) {
+    //[POST]: /upload/upload-profile-pic
+    async uploadFile(req, res, next) {
         upload(req, res, function (err) {
             // req.file contains information of uploaded file
             // req.body contains information of text fields, if there were any
@@ -26,7 +24,7 @@ class homeController {
                 return res.send(err);
             }
             else if (err) {
-                return res.send(err);
+                return res.json(err);
             }
 
             // Display uploaded image for user validation
@@ -35,4 +33,4 @@ class homeController {
     }
 }
 
-module.exports = new homeController()
+module.exports = new uploadController()

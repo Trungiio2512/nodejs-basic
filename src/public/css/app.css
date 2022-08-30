@@ -43,3 +43,8 @@
 .form-group input {
     padding: 4px 12px;
 }
+
+.form-contain > form > div {
+    display: flex;
+    flex-direction: column;
+}

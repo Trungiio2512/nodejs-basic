@@ -1,7 +1,9 @@
 const routerHome = require('./home')
 const routerUser = require('./routerUser')
-function routes(app) {
+const routerUpload = require('./uploadFile')
 
+function routes(app) {
+    app.use('/upload', routerUpload)
     app.use('/user', routerUser)
     app.use('/', routerHome)
 }
